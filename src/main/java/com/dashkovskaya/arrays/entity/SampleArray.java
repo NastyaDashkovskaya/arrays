@@ -1,0 +1,98 @@
+package com.dashkovskaya.arrays.entity;
+
+import java.util.Arrays;
+
+import com.dashkovskaya.arrays.exception.ArrayException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+public class SampleArray {
+
+  private static final Logger logger = LogManager.getLogger(SampleArray.class);
+
+  private int IdArray;
+  private int[] array;
+
+  private SampleArray() {
+  }
+
+  public int getIdArray() {
+    return IdArray;
+  }
+  public int[] getArray() {
+    return Arrays.copyOf(array, array.length);
+  }
+
+  public static Builder newBuilder() {
+    return new SampleArray().new Builder();
+  }
+
+  @Override
+  public boolean equals(Object o) {
+
+    if (this == o) {
+      return true;
+    }
+
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+
+    SampleArray that = (SampleArray) o;
+    if (IdArray == that.IdArray){
+      return true;
+    }
+
+    for (int i = 0; i < array.length; i++) {
+      if (array[i] != that.array[i]) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
+  @Override
+  public int hashCode() {
+    int result = IdArray;
+    for (int i : array) {
+      result = 31 * result + i;
+    }
+    return result;
+  }
+
+  @Override
+  public String toString() {
+    return "SampleArray{" +
+            "IdArray=" + IdArray +
+            ", array=" + Arrays.toString(array) +
+            '}';
+  }
+
+  public class Builder {
+
+    private Builder(){
+    }
+    public Builder setIdArray(int IdArray) throws ArrayException{
+     if(IdArray < 0){
+       logger.warn("Array's ID is not correct!");
+       throw new ArrayException("Array's ID must be a positive number!");
+     }
+      SampleArray.this.IdArray = IdArray;
+      return this;
+    }
+
+    public Builder setArray(int... array) throws ArrayException {
+      if (array == null || array.length == 0){
+        logger.warn("Array is empty!");
+        throw new ArrayException("Array cannot be empty!");
+      }
+      SampleArray.this.array = Arrays.copyOf(array, array.length);
+      return this;
+    }
+
+    public SampleArray build() {
+      return SampleArray.this;
+    }
+  }
+}
