@@ -2,7 +2,7 @@ package com.dashkovskaya.arrays.service.impl;
 
 import com.dashkovskaya.arrays.exception.ArrayException;
 import com.dashkovskaya.arrays.service.SumOfArray;
-import com.dashkovskaya.arrays.service.validator.ArrayValidator;
+import com.dashkovskaya.arrays.validator.ArrayValidator;
 
 public class SumOfArrayService implements SumOfArray {
   @Override

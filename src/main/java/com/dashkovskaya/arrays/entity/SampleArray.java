@@ -8,16 +8,16 @@ import org.apache.logging.log4j.Logger;
 
 public class SampleArray {
 
-  private static final Logger logger = LogManager.getLogger(SampleArray.class);
+  static final Logger logger = LogManager.getLogger();
 
-  private int IdArray;
+  private int arrayId;
   private int[] array;
 
   private SampleArray() {
   }
 
-  public int getIdArray() {
-    return IdArray;
+  public int getArrayId() {
+    return arrayId;
   }
   public int[] getArray() {
     return Arrays.copyOf(array, array.length);
@@ -39,7 +39,7 @@ public class SampleArray {
     }
 
     SampleArray that = (SampleArray) o;
-    if (IdArray == that.IdArray){
+    if (arrayId == that.arrayId){
       return true;
     }
 
@@ -54,7 +54,7 @@ public class SampleArray {
 
   @Override
   public int hashCode() {
-    int result = IdArray;
+    int result = arrayId;
     for (int i : array) {
       result = 31 * result + i;
     }
@@ -64,7 +64,7 @@ public class SampleArray {
   @Override
   public String toString() {
     return "SampleArray{" +
-            "IdArray=" + IdArray +
+            "IdArray=" + arrayId +
             ", array=" + Arrays.toString(array) +
             '}';
   }
@@ -78,7 +78,7 @@ public class SampleArray {
        logger.warn("Array's ID is not correct!");
        throw new ArrayException("Array's ID must be a positive number!");
      }
-      SampleArray.this.IdArray = IdArray;
+      SampleArray.this.arrayId = IdArray;
       return this;
     }
 

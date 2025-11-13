@@ -1,4 +1,4 @@
-package com.dashkovskaya.arrays.service.validator;
+package com.dashkovskaya.arrays.validator;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -6,7 +6,7 @@ import com.dashkovskaya.arrays.exception.ArrayException;
 
 public class ArrayValidator {
 
-  private static final Logger logger = LogManager.getLogger(ArrayValidator.class);
+  static final Logger logger = LogManager.getLogger();
 
   public void validateArray(int[] array) throws ArrayException{
     if (array == null || array.length == 0){
