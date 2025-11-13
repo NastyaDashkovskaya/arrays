@@ -33,8 +33,6 @@ class ArrayServicesTest {
     changeService = new ArrayElementsChangeService();
   }
 
-  // ---------------- findMaxArrayValue() ----------------
-
   @Test
   void testFindMaxArrayValue_NormalArray() throws ArrayException {
     int[] array = {2, 10, 5, 8};
@@ -48,8 +46,6 @@ class ArrayServicesTest {
     assertThrows(ArrayException.class, () -> maxService.findMaxArrayValue(null));
   }
 
-  // ---------------- findMinArrayValue() ----------------
-
   @Test
   void testFindMinArrayValue_NormalArray() throws ArrayException {
     int[] array = {4, -3, 9, 0};
@@ -62,8 +58,6 @@ class ArrayServicesTest {
   void testFindMinArrayValue_ThrowsExceptionForEmpty() {
     assertThrows(ArrayException.class, () -> minService.findMinArrayValue(new int[]{}));
   }
-
-  // ---------------- calculateSumOfArray() ----------------
 
   @Test
   void testCalculateSumOfArray_NormalArray() throws ArrayException {
@@ -86,8 +80,6 @@ class ArrayServicesTest {
     assertThrows(ArrayException.class, () -> sumService.calculateSumOfArray(null));
   }
 
-  // ---------------- findAverageArrayValue() ----------------
-
   @Test
   void testFindAverageArrayValue_NormalArray() throws ArrayException {
     int[] array = {2, 4, 6, 8};
@@ -103,8 +95,6 @@ class ArrayServicesTest {
 
     assertEquals(10.0, average);
   }
-
-  // ---------------- countPositiveAndNegative() ----------------
 
   @Test
   void testCountPositiveAndNegative_MixedValues() throws ArrayException {
@@ -123,8 +113,6 @@ class ArrayServicesTest {
     assertEquals(0, result[0]);
     assertEquals(3, result[1]);
   }
-
-  // ---------------- changeArrayElements() ----------------
 
   @Test
   void testChangeArrayElements_ReplacesNegativesWithZero() throws ArrayException {
