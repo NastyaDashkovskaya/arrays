@@ -11,5 +11,5 @@ public class MaxArrayValueService implements MaxArrayValue {
       if (i > max) max = i;
     }
     return max;
-}
+  }
 }

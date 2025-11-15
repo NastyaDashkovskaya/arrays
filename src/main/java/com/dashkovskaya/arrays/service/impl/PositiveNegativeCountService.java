@@ -7,7 +7,6 @@ public class PositiveNegativeCountService implements PositiveNegativeCount {
 
   public int[] countPositiveAndNegative(int[] array) throws ArrayException {
 
-
     int positiveCount = 0;
     int negativeCount = 0;
 
