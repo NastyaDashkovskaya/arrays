@@ -11,15 +11,16 @@ import java.util.List;
 
 public class ArrayReader implements SampleArrayReader{
   static final Logger logger = LogManager.getLogger();
+
   private static final Path PATH = Path.of("src/main/resources/data.txt");
+
   @Override
   public List<String> readLines(String filePath) throws ArrayException {
     try{
-    Path path = Path.of(filePath);
-      if (!Files.exists(path)) {
+      if (!Files.exists(PATH)) {
         throw new ArrayException("File is not found. " + filePath);
       }
-        return Files.lines(path)
+        return Files.lines(PATH)
                 .filter(line -> line != null && !line.isBlank())
                 .toList();
   } catch (IOException exception){

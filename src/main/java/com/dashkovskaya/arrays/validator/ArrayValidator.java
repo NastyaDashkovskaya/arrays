@@ -7,7 +7,7 @@ public class ArrayValidator implements SampleArrayValidator{
 
   static final Logger logger = LogManager.getLogger();
 
-  static final String SAMPLE_ARRAY_REGEX = "^[-0-9]+([ ,\\-]+[-0-9]+)*$";
+  private final String SAMPLE_ARRAY_REGEX = "^[-0-9]+([ ,\\-]+[-0-9]+)*$";
   @Override
   public boolean isStringValid(String line) {
     if (line == null || line.isBlank()) {

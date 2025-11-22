@@ -4,28 +4,30 @@ import com.dashkovskaya.arrays.exception.ArrayException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.Arrays;
+
 public class TextParser implements SampleArrayParser {
-  static final Logger logger = LogManager.getLogger();
+  private final Logger logger = LogManager.getLogger();
+  private final String SPLIT_REGEX = "\\s+";
 
   @Override
-  public int[] parseArray(String stringToParse) throws ArrayException {
-    if (stringToParse == null || stringToParse.isBlank()) {
+  public int[] parseArray(String lineArrayToParse) throws ArrayException {
+    if (lineArrayToParse == null || lineArrayToParse.isBlank()) {
       logger.error("The line is empty.");
       throw new ArrayException("Line can't be empty.");
     }
-
     try {
-      String normalizedString = stringToParse.replace(",", " ").replace("-", " ");
-      String[] parts = normalizedString.trim().split("\\s+");
-      int[] array = new int[parts.length];
-
-      for (int i = 0; i < parts.length; i++) {
-        array[i] = Integer.parseInt(parts[i]);
-      }
+      int[] array = Arrays.stream(lineArrayToParse
+                      .replace(",", " ")
+                      .replace("-", " ")
+                      .trim()
+                      .split(SPLIT_REGEX))
+                      .mapToInt(Integer::parseInt)
+                      .toArray();
       return array;
     } catch (NumberFormatException exception) {
-      logger.error("String conversion error: '{}'", stringToParse);
-      throw new ArrayException("String conversion error. " + stringToParse, exception);
+      logger.error("String conversion error: '{}'", lineArrayToParse);
+      throw new ArrayException("String conversion error. " + lineArrayToParse, exception);
     }
   }
 }

@@ -1,13 +1,18 @@
 package com.dashkovskaya.arrays.service.impl;
 
 import com.dashkovskaya.arrays.service.ArraySort;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.Arrays;
 
 public class ArraySortImpl implements ArraySort {
 
+  private final Logger logger = LogManager.getLogger();
+
   @Override
   public int[] bublesort(int[] array) {
+
     int[] arraySort = Arrays.copyOf(array, array.length);
 
     for (int i = 0; i < arraySort.length - 1; i++) {
