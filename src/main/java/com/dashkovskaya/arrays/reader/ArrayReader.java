@@ -7,15 +7,15 @@ import org.apache.logging.log4j.Logger;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 public class ArrayReader implements SampleArrayReader{
   static final Logger logger = LogManager.getLogger();
 
-  private static final Path PATH = Path.of("src/main/resources/data.txt");
-
   @Override
   public List<String> readLines(String filePath) throws ArrayException {
+    Path PATH = Paths.get(filePath);
     try{
       if (!Files.exists(PATH)) {
         throw new ArrayException("File is not found. " + filePath);
@@ -29,3 +29,4 @@ public class ArrayReader implements SampleArrayReader{
     }
 }
 }
+

@@ -1,4 +1,4 @@
 package com.dashkovskaya.arrays.statistics;
 
-public class SampleArrayStatistics {
+public record SampleArrayStatistics (int sum, int min, int max, double average){
 }

@@ -3,15 +3,18 @@ package com.dashkovskaya.arrays.entity;
 import java.util.Arrays;
 
 import com.dashkovskaya.arrays.exception.ArrayException;
+import com.dashkovskaya.arrays.observer.SampleArrayObservable;
+import com.dashkovskaya.arrays.observer.SampleArrayObserver;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class SampleArray {
+public class SampleArray implements SampleArrayObservable {
 
   static final Logger logger = LogManager.getLogger();
 
   private int arrayId;
   private int[] array;
+  private SampleArrayObserver observer;
 
   private SampleArray() {
   }
@@ -68,6 +71,20 @@ public class SampleArray {
             ", array=" + Arrays.toString(array) +
             '}';
   }
+  public void addObserver(SampleArrayObserver observer) {
+    this.observer = observer;
+  }
+
+  public void removeCustomArrayObserver() {
+    this.observer = null;
+  }
+
+  @Override
+    public void notifySampleArrayObserver() {
+      if (observer != null) {
+        observer.update(this);
+      }
+    }
 
   public class Builder {
 

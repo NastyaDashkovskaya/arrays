@@ -9,14 +9,14 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class SampleArrayServiceTest {
 
-  int[] exampleArray;
+  SampleArray exampleArray;
+
   @BeforeEach
   public void setUp() throws ArrayException {
-    SampleArray sampleArray = SampleArray.newBuilder()
+    exampleArray = SampleArray.newBuilder()
             .setIdArray(1)
             .setArray(1, 0, -2, 3, 6, 7)
             .build();
-    exampleArray = sampleArray.getArray();
   }
 
   @Test
@@ -63,7 +63,7 @@ public class SampleArrayServiceTest {
   public void changeArrayElements() throws ArrayException {
     int[] expected = {1, 0, 0, 3, 6, 7};
     ArrayElementsChangeService changeService = new ArrayElementsChangeService();
-    int[] actual = changeService.changeArrayElements(exampleArray);
+    int[] actual = changeService.changeArrayElements(exampleArray).getArray();
     assertArrayEquals(expected, actual);
   }
 
