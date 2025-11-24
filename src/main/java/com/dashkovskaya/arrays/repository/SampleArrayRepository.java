@@ -3,10 +3,12 @@ package com.dashkovskaya.arrays.repository;
 import com.dashkovskaya.arrays.entity.SampleArray;
 import com.dashkovskaya.arrays.exception.ArrayException;
 import com.dashkovskaya.arrays.reader.SampleArrayReader;
+import com.dashkovskaya.arrays.specification.SampleArraySpecificator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class SampleArrayRepository {
@@ -26,35 +28,40 @@ public class SampleArrayRepository {
     return instance;
   }
 
-  public boolean addArray(SampleArray sampleArray) throws ArrayException {
+  public void addArray(SampleArray sampleArray) throws ArrayException {
     if(sampleArray == null) {
       logger.warn("Array is null.");
       throw new ArrayException("Cannot add null array.");
     }
-    return sampleArrays.add(sampleArray);
+     sampleArrays.add(sampleArray);
   }
 
-  public boolean removeArray(SampleArray sampleArray) throws ArrayException {
+  public void removeArray(SampleArray sampleArray) throws ArrayException {
     if(sampleArray == null) {
       logger.warn("Trying to remove null array from repository");
       throw new ArrayException("Cannot remove null from repository");
     }
-    return sampleArrays.remove(sampleArray);
+    sampleArrays.remove(sampleArray);
   }
 
   public List<SampleArray> getCustomArrays(){
     return List.copyOf(sampleArrays);
   }
 
-  @Override
-  public List<SampleArray> query(Specification specification) {
+  public List<SampleArray> query(SampleArraySpecificator specification) {
     List<SampleArray> result = new ArrayList<>();
-    for (SampleArray array : storage) {
-      if (specification.match(array)) {
+    for (SampleArray array : sampleArrays) {
+      if (specification.specs(array)) {
         result.add(array);
       }
     }
     return result;
   }
 
+  public List<SampleArray> sort(Comparator<SampleArray> comparator) {
+    List<SampleArray> sortedArray = new ArrayList<>(sampleArrays);
+    sortedArray.sort(comparator);
+    logger.info("Array was sorted.");
+    return sortedArray;
+  }
 }

@@ -1,5 +1,6 @@
 package com.dashkovskaya.arrays.service.impl;
 
+import com.dashkovskaya.arrays.entity.SampleArray;
 import com.dashkovskaya.arrays.exception.ArrayException;
 import com.dashkovskaya.arrays.service.AverageArrayValue;
 import org.apache.logging.log4j.LogManager;
@@ -9,12 +10,13 @@ public class AverageArrayValueService implements AverageArrayValue {
 
   private final Logger logger = LogManager.getLogger();
 
-  public double findAverageArrayValue(int[] array) throws ArrayException {
+  public double findAverageArrayValue(SampleArray sampleArray) throws ArrayException {
 
-    if (array == null) {
+    if (sampleArray == null) {
       logger.error("Array is null. Cannot  find average.");
       throw new ArrayException("Array is null");
     }
+    int[] array = sampleArray.getArray();
     double sum = 0;
 
     for (int value : array) {

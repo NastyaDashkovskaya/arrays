@@ -1,5 +1,6 @@
 package com.dashkovskaya.arrays.service.impl;
 
+import com.dashkovskaya.arrays.entity.SampleArray;
 import com.dashkovskaya.arrays.exception.ArrayException;
 import com.dashkovskaya.arrays.service.ArrayElementsChange;
 import org.apache.logging.log4j.LogManager;
@@ -9,18 +10,23 @@ public class ArrayElementsChangeService implements ArrayElementsChange {
 
   private final Logger logger = LogManager.getLogger();
 
-  public int[] changeArrayElements(int[] array) throws ArrayException {
+  public SampleArray changeArrayElements(SampleArray sampleArray) throws ArrayException {
 
-    if (array == null) {
+    if (sampleArray == null) {
       logger.error("Array is null. Cannot  change array.");
       throw new ArrayException("Array is null");
     }
+    int[] array = sampleArray.getArray();
+
     for (int i = 0; i < array.length; i++) {
       if (array[i] < 0) {
         array[i] = 0;
       }
     }
-    return array;
+    return  SampleArray.newBuilder()
+            .setIdArray(sampleArray.getArrayId())
+            .setArray(array)
+            .build();
   }
 }
 

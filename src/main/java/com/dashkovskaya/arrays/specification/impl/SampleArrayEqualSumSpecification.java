@@ -16,7 +16,7 @@ public class SampleArrayEqualSumSpecification implements SampleArraySpecificator
   public boolean specs(SampleArray array) {
     SumOfArrayService sumOfArrayService = new SumOfArrayService();
    try{
-    return sum == sumOfArrayService.calculateSumOfArray(array.getArray());
+    return sum == sumOfArrayService.calculateSumOfArray(array);
    } catch (ArrayException exception){
      return false;
    }

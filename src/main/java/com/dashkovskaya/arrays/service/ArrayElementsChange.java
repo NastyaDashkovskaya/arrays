@@ -1,7 +1,8 @@
 package com.dashkovskaya.arrays.service;
 
+import com.dashkovskaya.arrays.entity.SampleArray;
 import com.dashkovskaya.arrays.exception.ArrayException;
 
 public interface ArrayElementsChange {
-  int[] changeArrayElements(int[] array) throws ArrayException;
+  SampleArray changeArrayElements(SampleArray array) throws ArrayException;
 }

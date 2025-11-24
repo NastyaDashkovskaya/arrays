@@ -1,5 +1,7 @@
 package com.dashkovskaya.arrays.service.impl;
 
+import com.dashkovskaya.arrays.entity.SampleArray;
+import com.dashkovskaya.arrays.exception.ArrayException;
 import com.dashkovskaya.arrays.service.ArraySort;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -11,9 +13,13 @@ public class ArraySortImpl implements ArraySort {
   private final Logger logger = LogManager.getLogger();
 
   @Override
-  public int[] bublesort(int[] array) {
+  public SampleArray bubblesort(SampleArray sampleArray) throws ArrayException{
 
-    int[] arraySort = Arrays.copyOf(array, array.length);
+    if (sampleArray == null) {
+      logger.error("SampleArray is null. Cannot sort array.");
+      throw new ArrayException("SampleArray is null");
+    }
+    int[] arraySort = Arrays.copyOf(sampleArray.getArray(), sampleArray.getArray().length);
 
     for (int i = 0; i < arraySort.length - 1; i++) {
       for (int j = 0; j < arraySort.length - 1 - i; j++) {
@@ -24,12 +30,20 @@ public class ArraySortImpl implements ArraySort {
         }
       }
     }
-    return arraySort;
+    return SampleArray.newBuilder()
+            .setIdArray(sampleArray.getArrayId())
+            .setArray(arraySort)
+            .build();
   }
 
   @Override
-  public int[] selectionSort(int[] array) {
-    int[] arraySort = Arrays.copyOf(array, array.length);
+  public SampleArray selectionSort(SampleArray sampleArray) throws ArrayException{
+
+    if (sampleArray == null) {
+      logger.error("SampleArray is null. Cannot sort array.");
+      throw new ArrayException("SampleArray is null");
+    }
+    int[] arraySort = Arrays.copyOf(sampleArray.getArray(), sampleArray.getArray().length);
 
     for (int i = 0; i < arraySort.length - 1; i++) {
       int minIndex = i;
@@ -42,12 +56,20 @@ public class ArraySortImpl implements ArraySort {
       arraySort[minIndex] = arraySort[i];
       arraySort[i] = temp;
     }
-    return arraySort;
+    return SampleArray.newBuilder()
+            .setIdArray(sampleArray.getArrayId())
+            .setArray(arraySort)
+            .build();
   }
 
   @Override
-  public int[] insertionsort(int[] array) {
-    int[] arraySort = Arrays.copyOf(array, array.length);
+  public SampleArray insertionSort(SampleArray sampleArray) throws ArrayException{
+
+    if (sampleArray == null) {
+      logger.error("SampleArray is null. Cannot sort array.");
+      throw new ArrayException("SampleArray is null");
+    }
+    int[] arraySort = Arrays.copyOf(sampleArray.getArray(), sampleArray.getArray().length);
 
       for (int i = 1; i < arraySort.length; i++) {
         int key = arraySort[i];
@@ -58,6 +80,9 @@ public class ArraySortImpl implements ArraySort {
         }
         arraySort[j + 1] = key;
       }
-      return arraySort;
+    return SampleArray.newBuilder()
+            .setIdArray(sampleArray.getArrayId())
+            .setArray(arraySort)
+            .build();
   }
 }
